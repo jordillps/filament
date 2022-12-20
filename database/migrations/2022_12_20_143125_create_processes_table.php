@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('processes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamp('deleted_at')->nullable();
-            $table->string('photo_path');
+            $table->decimal('weight', $precision = 8, $scale = 2);
+            $table->decimal('price', $precision = 8, $scale = 2);
+            $table->string('unit');
+            $table->enum('type', ['product', 'service','material']);
+            $table->enum('status', ['pending', 'finished']);
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('processes');
     }
 };

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "99e745e83a4c587f18febbcf81e193fa",
+    "content-hash": "3b4019eefb9e729c90b2a49417e82e16",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -1499,6 +1499,84 @@
                 }
             ],
             "time": "2022-10-26T14:07:24+00:00"
+        },
+        {
+            "name": "josezenem/laravel-make-migration-pivot",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/josezenem/laravel-make-migration-pivot.git",
+                "reference": "b27dc753652fe107773e8198067603f8b9e83ef9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/josezenem/laravel-make-migration-pivot/zipball/b27dc753652fe107773e8198067603f8b9e83ef9",
+                "reference": "b27dc753652fe107773e8198067603f8b9e83ef9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.9.2"
+            },
+            "require-dev": {
+                "nunomaduro/collision": "^6.0",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^7.0",
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.1",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Josezenem\\LaravelMakeMigrationPivot\\LaravelMakeMigrationPivotServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelMakeMigrationPivot": "Josezenem\\LaravelMakeMigrationPivot\\Facades\\LaravelMakeMigrationPivot"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Josezenem\\LaravelMakeMigrationPivot\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jose Jimenez",
+                    "email": "jose@jimenez.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Make Laravel pivot tables using the new Laravel 9 closure migrations.",
+            "homepage": "https://github.com/josezenem/laravel-make-migration-pivot",
+            "keywords": [
+                "josezenem",
+                "laravel",
+                "laravel migrations",
+                "laravel-make-pivot",
+                "migration pivot"
+            ],
+            "support": {
+                "issues": "https://github.com/josezenem/laravel-make-migration-pivot/issues",
+                "source": "https://github.com/josezenem/laravel-make-migration-pivot/tree/1.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/josezenem",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-10-12T23:21:26+00:00"
         },
         {
             "name": "laravel/framework",
