@@ -17,16 +17,16 @@ class OrderFactory extends Factory
      */
     public function definition()
     {
-        $subtotal = $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 2000);
-        $tax =  round($subtotal * 0.21,2);
-        $total = $subtotal + $tax;
+        // $subtotal = $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 2000);
+        // $tax =  round($subtotal * 0.21,2);
+        // $total = $subtotal + $tax;
 
         return [
             'customer_id' => Customer::factory(),
-            'priority' => $this->faker->randomElement(['normal', 'urgent']),
-            'subtotal' => $subtotal,
-            'tax' => $tax,
-            'total'  => $total,
+            'priority' => $this->faker->randomElement(['Normal', 'Urgent']),
+            // 'subtotal' => $subtotal,
+            // 'tax' => $tax,
+            // 'total'  => $total,
             'comment' => $this->faker->text($maxNbChars = 200)
         ];
     }

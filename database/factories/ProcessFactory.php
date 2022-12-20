@@ -21,8 +21,8 @@ class ProcessFactory extends Factory
             'weight' =>$this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 10), 
             'price' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
             'unit' => $this->faker->word, 
-            'type' => $this->faker->randomElement(['product', 'service','material']),
-            'status' =>$this->faker->randomElement(['pending', 'finished']),
+            'type' => $this->faker->randomElement(['Product', 'Service','Material']),
+            'status' =>$this->faker->randomElement(['Pending', 'Finished']),
         ];
     }
 }

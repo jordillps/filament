@@ -19,8 +19,8 @@ return new class extends Migration
             $table->decimal('weight', $precision = 8, $scale = 2);
             $table->decimal('price', $precision = 8, $scale = 2);
             $table->string('unit');
-            $table->enum('type', ['product', 'service','material']);
-            $table->enum('status', ['pending', 'finished']);
+            $table->enum('type', ['Product', 'Service','Material']);
+            $table->enum('status', ['Pending', 'Finished']);
             $table->timestamps();
         });
     }

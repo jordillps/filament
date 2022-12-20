@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained()->cascadeOnDelete();
-            $table->enum('priority', ['normal', 'urgent']);
+            $table->enum('priority', ['Normal', 'Urgent']);
             $table->decimal('subtotal', $precision = 8, $scale = 2)->nullable();
             $table->decimal('tax', $precision = 8, $scale = 2)->nullable();
             $table->decimal('total', $precision = 8, $scale = 2)->nullable();

@@ -9,7 +9,7 @@ class Process extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','weight','price','unit','type'];
+    protected $fillable = ['name','weight','price','unit','type','status'];
 
 
     public function products(){
