@@ -44,6 +44,20 @@ return [
             'throw' => false,
         ],
 
+        'products-images' => [
+            'driver' => 'local',
+            'root' => public_path('/img/products'),
+            'url' => env('APP_URL').'/img/products',
+            'visibility' => 'public',
+        ],
+
+        'users-images' => [
+            'driver' => 'local',
+            'root' => public_path('/img/users'),
+            'url' => env('APP_URL').'/img/users',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
