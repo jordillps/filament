@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('line_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained();
+            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained();
             $table->integer('quantity')->nullable();
             $table->float('subtotal')->nullable();
