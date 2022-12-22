@@ -17,6 +17,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Forms\Components\DatePicker;
 
 class OrderResource extends Resource
 {
@@ -42,6 +43,7 @@ class OrderResource extends Resource
                     TextInput::make('tax')->type('number')->step('any')->required()->disabled(),
                     TextInput::make('total')->type('number')->step('any')->required()->disabled(),
                     Textarea::make('comment')->required()->maxLength(255),
+                    DatePicker::make('created_at')->format('d-m-Y')->required(),
                 ])
             ]);
     }
@@ -58,7 +60,7 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('total')->money('eur')->extraAttributes(['class' => 'text-right']),
                 Tables\Columns\TextColumn::make('created_at')->label('Fecha')
                     ->date('d-m-Y'),
-            ])
+            ])->defaultSort('id', 'DESC')
             ->filters([
                 SelectFilter::make('priority')
                     ->options([

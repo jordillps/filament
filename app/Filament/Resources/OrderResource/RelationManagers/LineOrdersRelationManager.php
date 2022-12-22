@@ -18,7 +18,8 @@ use Filament\Forms\Components\Hidden;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\LineOrder;
-use Filament\Pages\Page;
+use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\Page;
 
 class LineOrdersRelationManager extends RelationManager
 {
@@ -38,8 +39,8 @@ class LineOrdersRelationManager extends RelationManager
                     ->relationship('order', 'id'),
                 Select::make('product_id')
                     ->relationship('product', 'name'),
-                // Select::make('product_id')
-                //     ->relationship('product', 'name')->disabled(static fn (Page $livewire): bool => $livewire instanceof EditLineOrder),
+                Select::make('product_id')
+                    ->relationship('product', 'name')->disabled(fn (Page $livewire) => $livewire instanceof EditRecord),
                 Forms\Components\TextInput::make('quantity')->required(),   
             ]);
     }
