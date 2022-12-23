@@ -16,4 +16,9 @@ class EditProduct extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    //Redirect to Index after creating this model
+    protected function getRedirectUrl(): string{
+        return $this->getResource()::getUrl('index');
+    }
 }

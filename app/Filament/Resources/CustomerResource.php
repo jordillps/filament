@@ -44,8 +44,8 @@ class CustomerResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
-                    ->unique(ignorable: fn(null|Model $record): null|Model => $record)
                     ->email()
+                    ->unique(Customer::class)
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('address')

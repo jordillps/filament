@@ -18,7 +18,7 @@ use Filament\Forms\Components\Hidden;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\LineOrder;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\CreateRecord;
 use Filament\Resources\Pages\Page;
 
 class LineOrdersRelationManager extends RelationManager
@@ -36,11 +36,11 @@ class LineOrdersRelationManager extends RelationManager
         return $form
             ->schema([
                 Select::make('order_id')
-                    ->relationship('order', 'id'),
+                    ->relationship('order', 'id')->default('John'),
                 Select::make('product_id')
-                    ->relationship('product', 'name'),
-                Select::make('product_id')
-                    ->relationship('product', 'name')->disabled(fn (Page $livewire) => $livewire instanceof EditRecord),
+                    ->relationship('product', 'name')->disabled(),
+                // Select::make('product_id')
+                //     ->relationship('product', 'name')->disabled(fn (Page $livewire) => $livewire instanceof CreateRecord),
                 Forms\Components\TextInput::make('quantity')->required(),   
             ]);
     }
@@ -92,5 +92,6 @@ class LineOrdersRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }    
+    }
+    
 }

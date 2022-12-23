@@ -40,7 +40,7 @@ class UserResource extends Resource
                         ->maxLength(255),
                     Forms\Components\TextInput::make('email')
                         ->email()
-                        ->unique(ignorable: fn(null|Model $record): null|Model => $record)
+                        ->unique(User::class)
                         ->required()
                         ->maxLength(255),
                     Forms\Components\DatePicker::make('email_verified_at'),
