@@ -39,9 +39,9 @@ class OrderResource extends Resource
                 ->schema([
                     Select::make('customer_id')->relationship('customer', 'name'),
                     Select::make('priority')->options(['Normal' => 'Normal','Urgent' => 'Urgent']),
-                    TextInput::make('subtotal')->type('number')->step('any')->required()->disabled(),
-                    TextInput::make('tax')->type('number')->step('any')->required()->disabled(),
-                    TextInput::make('total')->type('number')->step('any')->required()->disabled(),
+                    TextInput::make('subtotal')->type('number')->step('any')->disabled(),
+                    TextInput::make('tax')->type('number')->step('any')->disabled(),
+                    TextInput::make('total')->type('number')->step('any')->disabled(),
                     Textarea::make('comment')->required()->maxLength(255),
                     DatePicker::make('created_at')->format('d-m-Y')->required(),
                 ])

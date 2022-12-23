@@ -42,7 +42,7 @@ class ProductResource extends Resource
                             ->multiple()
                             ->relationship('processes', 'name'),
                 Forms\Components\TextInput::make('price')->type('number')->step('any')
-                    ->required(),
+                    ->required()->rule('numeric'),
                 Forms\Components\FileUpload::make('image')->image()
                     ->disk('products-images')
                     ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {
@@ -60,7 +60,7 @@ class ProductResource extends Resource
                     Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
                     Tables\Columns\ImageColumn::make('image')->disk('products-images'),
                     Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-                    Tables\Columns\TextColumn::make('price')->money('eur')->extraAttributes(['class' => 'text-right']),
+                    Tables\Columns\TextColumn::make('price')->money('eur')->sortable()->extraAttributes(['class' => 'text-right']),
                     Tables\Columns\TextColumn::make('created_at')
                         ->date('d-m-Y'),
                     // ])

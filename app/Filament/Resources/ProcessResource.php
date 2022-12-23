@@ -35,8 +35,8 @@ class ProcessResource extends Resource
                 Card::make()
                 ->schema([
                     TextInput::make('name')->required()->maxLength(255),
-                    TextInput::make('weight')->type('number')->step('any')->required(),
-                    TextInput::make('price')->type('number')->step('any')->required(),
+                    TextInput::make('weight')->type('number')->step('any')->rule('numeric')->required(),
+                    TextInput::make('price')->type('number')->step('any')->rule('numeric')->required(),
                     TextInput::make('unit')->required()->maxLength(20),
                     Select::make('type')->options(['Product' => 'Product','Service' => 'Service', 'Material' => 'Material']),
                     Select::make('status')->options(['Pending' => 'Pending','Finished' => 'Finished']),

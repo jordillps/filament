@@ -68,9 +68,9 @@ class CustomerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->label('Nombre')->extraAttributes(['class' => 'bg-gray-200']),
+                Tables\Columns\TextColumn::make('name')->label('Nombre')->sortable()->searchable()->extraAttributes(['class' => 'bg-gray-200']),
                 Tables\Columns\TextColumn::make('phone'),
-                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('created_at')->toggleable()
                     ->date('d-m-Y'),
             ])

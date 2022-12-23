@@ -57,8 +57,8 @@ class UserResource extends Resource
         return $table
         ->columns([
             Tables\Columns\ImageColumn::make('photo_path')->label('Imagen')->disk('users-images'),
-            Tables\Columns\TextColumn::make('name'),
-            Tables\Columns\TextColumn::make('email'),
+            Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
+            Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
             Tables\Columns\TextColumn::make('email_verified_at')
             ->date('d-m-Y'),
             Tables\Columns\TextColumn::make('created_at')
