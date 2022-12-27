@@ -27,6 +27,7 @@ class LineOrderResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('order_id')->required(),
                 Forms\Components\TextInput::make('product_id')->required(),
+                // Forms\Components\TextInput::make('quantity')->required()->numeric(),
                 Forms\Components\TextInput::make('quantity')->required()->rule('numeric'),
                 Forms\Components\TextInput::make('subtotal')->required(),
             ]);

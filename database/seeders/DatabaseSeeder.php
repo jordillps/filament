@@ -41,16 +41,6 @@ class DatabaseSeeder extends Seeder
         //Orders
         Order::factory(10)->create();
 
-        //Insert in order_product table
-        for ($i = 1; $i <= 10; $i++) {
-            for ($j = 1; $j <= 3; $j++) {
-                DB::table('order_product')->insert([
-                    'order_id' => $i,
-                    'product_id' => $j*2,
-                ]);
-            }
-        }
-
         //Insert in process_product table
         for ($i = 1; $i <= 10; $i++) {
             for ($j = 1; $j <= 3; $j++) {

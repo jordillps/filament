@@ -16,6 +16,8 @@ use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Livewire\TemporaryUploadedFile;
 use Filament\Tables\Columns\Layout\Split;
+use Closure;
+use Illuminate\Support\Str;
 
 class ProductResource extends Resource
 {
@@ -36,7 +38,12 @@ class ProductResource extends Resource
             ->schema([
                 Card::make()
                 ->schema([
-                Forms\Components\TextInput::make('name')->required()->maxLength(255),
+                Forms\Components\TextInput::make('name')->required()->maxLength(255)
+                ->reactive()
+                ->afterStateUpdated(function (Closure $set, $state) {
+                    $set('slug', Str::slug($state));
+                }),
+                Forms\Components\TextInput::make('slug')->required()->maxLength(255),
                 Forms\Components\Textarea::make('description')->required()->maxLength(65535),
                 Select::make('processes')
                             ->multiple()
@@ -58,9 +65,11 @@ class ProductResource extends Resource
             ->columns([
                 // Split::make([
                     Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
-                    Tables\Columns\ImageColumn::make('image')->disk('products-images'),
+                    Tables\Columns\ImageColumn::make('image')->disk('products-images')->width(40)->height(40),
                     Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                     Tables\Columns\TextColumn::make('price')->money('eur')->sortable()->extraAttributes(['class' => 'text-right']),
+                    Tables\Columns\TextColumn::make('processes_count')
+                    ->counts('processes')->label('Procesos'),
                     Tables\Columns\TextColumn::make('created_at')
                         ->date('d-m-Y'),
                     // ])

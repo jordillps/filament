@@ -71,6 +71,8 @@ class CustomerResource extends Resource
                 Tables\Columns\TextColumn::make('name')->label('Nombre')->sortable()->searchable()->extraAttributes(['class' => 'bg-gray-200']),
                 Tables\Columns\TextColumn::make('phone'),
                 Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('orders_count')
+                    ->counts('orders')->label('Pedidos'),
                 Tables\Columns\TextColumn::make('created_at')->toggleable()
                     ->date('d-m-Y'),
             ])

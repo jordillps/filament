@@ -41,7 +41,8 @@ class LineOrdersRelationManager extends RelationManager
                     ->relationship('product', 'name'),
                 // Select::make('product_id')
                 //     ->relationship('product', 'name')->disabled(fn (Page $livewire) => $livewire instanceof CreateRecord),
-                Forms\Components\TextInput::make('quantity')->required(),   
+                Forms\Components\TextInput::make('quantity')->required()->numeric()
+                ->extraInputAttributes(['min' => 1, 'max' => 10, 'step' => 1]),   
             ]);
     }
 
@@ -87,10 +88,10 @@ class LineOrdersRelationManager extends RelationManager
                     $order->total = $order->subtotal + $order->tax;
                     $order->save();
                 }),
-                Tables\Actions\DeleteAction::make(),
+                //Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                //Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
     

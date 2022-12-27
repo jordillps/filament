@@ -11,9 +11,6 @@ class Product extends Model
 
     protected $fillable = ['name','description','price', 'image'];
 
-    public function orders(){
-        return $this->belongsToMany(Order::class);
-    }
 
     public function processes(){
         return $this->belongsToMany(Process::class);

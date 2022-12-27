@@ -15,10 +15,6 @@ class Order extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function products(){
-        return $this->belongsToMany(Product::class);
-    }
-
     public function lineOrders(){
         return $this->hasMany(LineOrder::class);
     }
