@@ -36,9 +36,9 @@ class LineOrdersRelationManager extends RelationManager
         return $form
             ->schema([
                 Select::make('order_id')
-                    ->relationship('order', 'id')->default('John'),
+                    ->relationship('order', 'id'),
                 Select::make('product_id')
-                    ->relationship('product', 'name')->disabled(),
+                    ->relationship('product', 'name'),
                 // Select::make('product_id')
                 //     ->relationship('product', 'name')->disabled(fn (Page $livewire) => $livewire instanceof CreateRecord),
                 Forms\Components\TextInput::make('quantity')->required(),   
