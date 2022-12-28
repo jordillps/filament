@@ -28,6 +28,12 @@ class ProcessResource extends Resource
 
     protected static ?string $navigationGroup = 'Gestión';
 
+    protected static ?int $navigationSort = 4;
+
+
+    //To search globally in this resource
+    protected static ?string $recordTitleAttribute = 'name';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -82,5 +88,10 @@ class ProcessResource extends Resource
             'create' => Pages\CreateProcess::route('/create'),
             'edit' => Pages\EditProcess::route('/{record}/edit'),
         ];
-    }    
+    }
+    
+    public static function getNavigationBadge(): ?string{
+        // return Customer::count();
+        return self::getModel()::count();
+    }
 }

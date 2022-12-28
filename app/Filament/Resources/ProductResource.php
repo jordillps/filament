@@ -31,6 +31,12 @@ class ProductResource extends Resource
 
     protected static ?string $navigationGroup = 'Gestión';
 
+    protected static ?int $navigationSort = 3;
+
+
+    //To search globally in this resource
+    protected static ?string $recordTitleAttribute = 'name';
+
 
     public static function form(Form $form): Form
     {
@@ -100,5 +106,10 @@ class ProductResource extends Resource
             'create' => Pages\CreateProduct::route('/create'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
-    }    
+    }
+    
+    public static function getNavigationBadge(): ?string{
+        // return Customer::count();
+        return self::getModel()::count();
+    }
 }

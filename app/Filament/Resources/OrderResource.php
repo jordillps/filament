@@ -33,6 +33,9 @@ class OrderResource extends Resource
 
     protected static ?string $navigationGroup = 'Gestión';
 
+    protected static ?int $navigationSort = 2;
+
+
     public static function form(Form $form): Form
     {
         return $form
@@ -107,5 +110,10 @@ class OrderResource extends Resource
             'create' => Pages\CreateOrder::route('/create'),
             'edit' => Pages\EditOrder::route('/{record}/edit'),
         ];
-    }    
+    } 
+    
+    public static function getNavigationBadge(): ?string{
+        // return Customer::count();
+        return self::getModel()::count();
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CustomerResource\Pages;
 use App\Filament\Resources\CustomerResource\RelationManagers;
 use App\Models\Customer;
+use App\Models\Product;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -29,6 +30,11 @@ class CustomerResource extends Resource
     protected static ?string $pluralModelLabel = 'clientes';
 
     protected static ?string $navigationGroup = 'Gestión';
+
+    protected static ?int $navigationSort = 1;
+
+    //To search globally in this resource
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
     {
@@ -102,5 +108,15 @@ class CustomerResource extends Resource
             'create' => Pages\CreateCustomer::route('/create'),
             'edit' => Pages\EditCustomer::route('/{record}/edit'),
         ];
-    }    
+    }
+    
+    //Search for name and email and return name, because is the $recordTitleAttribute
+    public static function getGloballySearchableAttributes(): array{
+        return ['name', 'email'];
+    }
+
+    public static function getNavigationBadge(): ?string{
+        // return Customer::count();
+        return self::getModel()::count();
+    }
 }

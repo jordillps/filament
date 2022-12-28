@@ -125,4 +125,9 @@ class UserResource extends Resource
     public static function canDeleteAny() :bool{
         return false;
     }
+
+    public static function getNavigationBadge(): ?string{
+        // return Customer::count();
+        return self::getModel()::count();
+    }
 }
