@@ -15,6 +15,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Card;
 use Livewire\TemporaryUploadedFile;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
+use Filament\Facades\Filament;
 
 class UserResource extends Resource
 {
@@ -44,10 +47,6 @@ class UserResource extends Resource
                         ->required()
                         ->maxLength(255),
                     Forms\Components\DatePicker::make('email_verified_at'),
-                    Forms\Components\TextInput::make('password')
-                        ->password()
-                        ->required()
-                        ->maxLength(255),
                 ])
             ]);
     }
@@ -56,6 +55,7 @@ class UserResource extends Resource
     {
         return $table
         ->columns([
+            Tables\Columns\TextColumn::make('id')->sortable(),
             Tables\Columns\ImageColumn::make('photo_path')->label('Imagen')->disk('users-images'),
             Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
             Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
@@ -69,9 +69,28 @@ class UserResource extends Resource
             ])
             ->actions([
                 // Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('changePassword')
+            ->form([
+                Forms\Components\TextInput::make('new_password')
+                        ->password()
+                        ->label('New Password')
+                        ->required()
+                        ->rule(Password::default()),
+                Forms\Components\TextInput::make('new_password_confirmation')
+                        ->password()
+                        ->label('Confirm New Password')
+                        ->same('new_password')
+                        ->required()
+                        ->rule(Password::default()),
+            ])->action(function(User $record,array $data){
+                $record->update([
+                    'password' =>  Hash::make($data['new_password']),
+                ]);
+                Filament::notify('success', 'Password updated successfully');
+            }),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                // Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
     
@@ -86,8 +105,24 @@ class UserResource extends Resource
     {
         return [
             'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
+            // 'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
-    }    
+    }
+    
+
+
+    //No-one can create a User
+    public static function canCreate() :bool{
+        return false;
+    }
+
+    //No-one can delete a User
+    public static function canDelete(Model $record) :bool{
+        return false;
+    }
+
+    public static function canDeleteAny() :bool{
+        return false;
+    }
 }

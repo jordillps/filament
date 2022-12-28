@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
+use Doctrine\DBAL\Query;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -17,6 +18,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\DatePicker;
 
 class OrderResource extends Resource
@@ -53,7 +55,8 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('customer.name')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('customer.name')->sortable()->searchable()
+                ->url(fn (Order $record) => CustomerResource::getUrl('edit', ['record' => $record->customer])),
                 Tables\Columns\TextColumn::make('priority')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('subtotal')->money('eur')->extraAttributes(['class' => 'text-right']),
                 Tables\Columns\TextColumn::make('tax')->money('eur')->extraAttributes(['class' => 'text-right']),
@@ -66,7 +69,20 @@ class OrderResource extends Resource
                     ->options([
                         'Normal' => 'Normal',
                         'Urgent' => 'Urgent',
-                ])
+                    ]),
+                    Filter::make('created_at')
+                        ->form([
+                            DatePicker::make('created_from')->format('d-m-Y'),
+                            DatePicker::make('created_until')->format('d-m-Y')
+                        ])
+                        ->query(function ($query,array $data){
+                            return $query
+                                ->when($data['created_from'],
+                                fn($query) => $query->whereDate('created_at', '>=', $data['created_from']))
+                                ->when($data['created_until'],
+                                fn($query) => $query->whereDate('created_at', '<=', $data['created_until']));
+                        })
+                        
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
