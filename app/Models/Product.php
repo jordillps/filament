@@ -16,4 +16,8 @@ class Product extends Model
         return $this->belongsToMany(Process::class);
     }
 
+    public function lineOrders(){
+        return $this->HasMany(LineOrder::class);
+    }
+
 }
