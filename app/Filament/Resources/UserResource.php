@@ -58,6 +58,7 @@ class UserResource extends Resource
             Tables\Columns\TextColumn::make('id')->sortable(),
             Tables\Columns\ImageColumn::make('photo_path')->label('Imagen')->disk('users-images'),
             Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
+            Tables\Columns\TextColumn::make('role.name')->sortable(),
             Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
             Tables\Columns\TextColumn::make('email_verified_at')
             ->date('d-m-Y'),

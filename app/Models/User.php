@@ -45,6 +45,18 @@ class User extends Authenticatable implements FilamentUser
         'email_verified_at' => 'datetime',
     ];
 
+    public function role(){
+        return $this->belongsTo(Role::class); // apply your namespace accordingly
+    }
+
+    public function isAdmin(){
+        if($this->role->name == 'admin'){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
     //Only the users with this conditions can access filament
     public function canAccessFilament(): bool{
