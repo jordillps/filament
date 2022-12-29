@@ -20,6 +20,8 @@ use App\Models\Order;
 use App\Models\LineOrder;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Resources\Pages\Page;
+use Illuminate\Database\Eloquent\Model;
+
 
 class LineOrdersRelationManager extends RelationManager
 {
