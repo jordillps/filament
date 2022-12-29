@@ -88,7 +88,7 @@ class LineOrdersRelationManager extends RelationManager
                     $order->total = $order->subtotal + $order->tax;
                     $order->save();
                 }),
-                //Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 //Tables\Actions\DeleteBulkAction::make(),

@@ -36,11 +36,9 @@ class ProcessesRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('weight'),
                 Tables\Columns\TextColumn::make('price')->money('eur')->sortable()->searchable()->extraAttributes(['class' => 'text-right']),
                 Tables\Columns\TextColumn::make('unit'),
                 Tables\Columns\TextColumn::make('type')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('status')->sortable()->searchable(),
             ])
             ->filters([
                 //
@@ -49,8 +47,8 @@ class ProcessesRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
+                Tables\Actions\DetachAction::make(),
                 Tables\Actions\EditAction::make(),
-                //Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                //Tables\Actions\DeleteBulkAction::make(),

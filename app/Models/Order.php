@@ -16,6 +16,6 @@ class Order extends Model
     }
 
     public function lineOrders(){
-        return $this->hasMany(LineOrder::class);
+        return $this->HasMany(LineOrder::class);
     }
 }

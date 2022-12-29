@@ -42,6 +42,7 @@ class OrderResource extends Resource
             ->schema([
                 Card::make()
                 ->schema([
+                    TextInput::make('id')->disabled(),
                     Select::make('customer_id')->relationship('customer', 'name'),
                     Select::make('priority')->options(['Normal' => 'Normal','Urgent' => 'Urgent']),
                     TextInput::make('subtotal')->type('number')->step('any')->disabled(),

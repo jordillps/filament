@@ -19,6 +19,7 @@ use Filament\Tables\Columns\Layout\Split;
 use Closure;
 use Illuminate\Support\Str;
 
+
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
