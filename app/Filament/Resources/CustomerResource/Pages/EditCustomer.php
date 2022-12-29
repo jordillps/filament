@@ -13,7 +13,7 @@ class EditCustomer extends EditRecord
     protected function getActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            // Actions\DeleteAction::make(),
         ];
     }
 
@@ -30,4 +30,6 @@ class EditCustomer extends EditRecord
             $this->redirect($this->getResource()::getUrl('index'));
         }
     }
+
+   
 }

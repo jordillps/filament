@@ -8,8 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\FilamentUser;
+// use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable 
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -59,7 +60,7 @@ class User extends Authenticatable implements FilamentUser
 
 
     //Only the users with this conditions can access filament
-    public function canAccessFilament(): bool{
-        return str_ends_with($this->email, '@admin.com') && $this->hasVerifiedEmail();
-    }
+    // public function canAccessFilament(): bool{
+    //     return str_ends_with($this->email, '@admin.com') && $this->hasVerifiedEmail();
+    // }
 }

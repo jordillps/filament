@@ -41,9 +41,10 @@ class UserResource extends Resource
                     Forms\Components\TextInput::make('name')
                         ->required()
                         ->maxLength(255),
+                    Forms\Components\Select::make('role_id')->relationship('role', 'name'),
                     Forms\Components\TextInput::make('email')
                         ->email()
-                        ->unique(User::class)
+                        ->unique(ignoreRecord: true)
                         ->required()
                         ->maxLength(255),
                     Forms\Components\DatePicker::make('email_verified_at'),
@@ -69,7 +70,7 @@ class UserResource extends Resource
                 //
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('changePassword')
             ->form([
                 Forms\Components\TextInput::make('new_password')

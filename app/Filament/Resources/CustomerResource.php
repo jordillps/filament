@@ -87,7 +87,11 @@ class CustomerResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()->disabled(function(Customer $record){
+                    if($record->orders->count() > 0){
+                        return true;
+                    }
+                }),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
