@@ -10,6 +10,7 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\LineOrder;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
@@ -21,27 +22,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         // \App\Models\User::factory(10)->create();
-         Role::factory(1)->create(['name' => 'admin','description' =>'administrador']);
-         Role::factory(1)->create(['name' => 'user','description' =>'usuario de la aplicación']);
 
-         User::factory()->create([
-            'name' => 'Jordi Llobet',
-            'role_id' => 1,
-            'email' => 'admin@admin.com',
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'photo_path' => 'user-20-12-2022-16-21-37-JordiLlobet.jpg'
-        ]);
+        //Create migration with Users
 
-        User::factory()->create([
-            'name' => 'User User',
-            'role_id' => 2,
-            'email' => 'user@user.com',
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        ]);
+        //  Role::factory(1)->create(['name' => 'admin','description' =>'administrador']);
+        //  Role::factory(1)->create(['name' => 'user','description' =>'usuario de la aplicación']);
 
+        //  User::factory()->create([
+        //     'name' => 'Jordi Llobet',
+        //     'role_id' => 1,
+        //     'email' => 'admin@admin.com',
+        //     'email_verified_at' => now(),
+        //     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        //     'photo_path' => 'user-20-12-2022-16-21-37-JordiLlobet.jpg'
+        // ]);
+
+        // User::factory()->create([
+        //     'name' => 'User User',
+        //     'role_id' => 2,
+        //     'email' => 'user@user.com',
+        //     'email_verified_at' => now(),
+        //     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        // ]);
+
+
+        //Create migration without Users
         //Customers
         Customer::factory(10)->create();
 
