@@ -1,0 +1,6 @@
+<x-filament::page>
+    Contact Page
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget tempor tortor. Donec ultricies sit amet massa vel imperdiet. Nulla laoreet luctus mi id consectetur. Praesent mi lectus, fermentum sed suscipit at, tempor vel erat. Suspendisse eget leo mauris. Suspendisse dictum eros sem, quis gravida odio feugiat in. Aenean pellentesque pharetra elit eget blandit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis in neque erat. Donec nec dui ex.</p>
+
+    <p>Donec nec tincidunt urna. Aenean euismod odio ac efficitur vulputate. Quisque tempor, tortor non bibendum dapibus, erat mi tristique nisl, id tempor ante augue a ante. Nam justo sapien, tincidunt in tellus ut, volutpat ornare dolor. In non finibus dui. Etiam tempor nisl vel interdum egestas. In in sem sed leo pharetra aliquet. Suspendisse non sagittis sem, vitae porttitor velit. Mauris pharetra dapibus libero, consequat aliquet leo rutrum nec. Suspendisse quam purus, lacinia a erat et, consequat semper diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tellus elit, dictum eu scelerisque sed, dignissim eu ligula.</p>
+</x-filament::page>

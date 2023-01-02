@@ -18,9 +18,8 @@ use Filament\Forms\Components\Hidden;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\LineOrder;
-use Filament\Resources\Pages\CreateRecord;
-use Filament\Resources\Pages\Page;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Tables\Contracts\HasRelationshipTable;
 
 
 class LineOrdersRelationManager extends RelationManager
@@ -38,11 +37,9 @@ class LineOrdersRelationManager extends RelationManager
         return $form
             ->schema([
                 Select::make('order_id')
-                    ->relationship('order', 'id'),
+                    ->relationship('order', 'id')->disabledOn('edit'),
                 Select::make('product_id')
-                    ->relationship('product', 'name'),
-                // Select::make('product_id')
-                //     ->relationship('product', 'name')->disabled(fn (Page $livewire) => $livewire instanceof CreateRecord),
+                    ->relationship('product', 'name')->disabledOn('edit')->required(),
                 Forms\Components\TextInput::make('quantity')->required()->numeric()
                 ->extraInputAttributes(['min' => 1, 'max' => 10, 'step' => 1]),   
             ]);
@@ -53,6 +50,7 @@ class LineOrdersRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id'),
+                Tables\Columns\TextColumn::make('order_id')->label('Pedido'),
                 Tables\Columns\TextColumn::make('product.name'),
                 Tables\Columns\TextColumn::make('quantity'),
                 Tables\Columns\TextColumn::make('product.price')->label('Price')->money('eur')->extraAttributes(['class' => 'text-right']),
@@ -64,6 +62,10 @@ class LineOrdersRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
+                // CreateAction::make()
+                //     ->using(function (HasRelationshipTable $livewire, array $data): Model {
+                //     return $livewire->getRelationship()->create($data);
+                // })
                 Tables\Actions\CreateAction::make()->mutateFormDataUsing(function (array $data): array {
                     $product = Product::where('id', $data['product_id'])->first();
                     $data['subtotal'] = round($data['quantity'] * $product->price , 2);

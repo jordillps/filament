@@ -8,11 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\FilamentUser;
-// use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable 
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -21,9 +21,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'role_id',
         'email',
         'password',
+        'email_verified_at',
         'photo_path'
     ];
 
@@ -50,13 +50,13 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class); // apply your namespace accordingly
     }
 
-    public function isAdmin(){
-        if($this->role->name == 'admin'){
-            return true;
-        }else{
-            return false;
-        }
-    }
+    // public function isAdmin(){
+    //     if($this->role->name == 'admin'){
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
 
 
     //Only the users with this conditions can access filament

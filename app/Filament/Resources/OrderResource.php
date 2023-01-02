@@ -61,7 +61,12 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('customer.name')->sortable()->searchable()
                 ->url(fn (Order $record) => CustomerResource::getUrl('edit', ['record' => $record->customer])),
-                Tables\Columns\TextColumn::make('priority')->sortable()->searchable(),
+                Tables\Columns\BadgeColumn::make('priority')->sortable()->searchable()->color(static function ($state): string {
+                    if ($state === 'Urgent') {
+                        return 'success';
+                    }
+                    return 'secondary';
+                }),
                 Tables\Columns\TextColumn::make('subtotal')->money('eur')->extraAttributes(['class' => 'text-right']),
                 Tables\Columns\TextColumn::make('tax')->money('eur')->extraAttributes(['class' => 'text-right']),
                 Tables\Columns\TextColumn::make('total')->money('eur')->extraAttributes(['class' => 'text-right']),

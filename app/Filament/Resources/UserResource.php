@@ -18,6 +18,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
 use Filament\Facades\Filament;
+use Filament\Forms\Components\MorphToSelect;
+use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\Page;
 
 class UserResource extends Resource
 {
@@ -41,13 +44,29 @@ class UserResource extends Resource
                     Forms\Components\TextInput::make('name')
                         ->required()
                         ->maxLength(255),
-                    Forms\Components\Select::make('role_id')->relationship('role', 'name'),
+                    Forms\Components\Select::make('roles')
+                        ->multiple()
+                        ->relationship('roles', 'name'),
                     Forms\Components\TextInput::make('email')
                         ->email()
                         ->unique(ignoreRecord: true)
                         ->required()
                         ->maxLength(255),
                     Forms\Components\DatePicker::make('email_verified_at'),
+                    Forms\Components\TextInput::make('password')
+                        ->password()
+                        ->label('Password')
+                        ->required()
+                        ->visibleOn('create')
+                        ->rule(Password::default()),
+                    Forms\Components\TextInput::make('password_confirmation')
+                        ->password()
+                        ->label('Confirm Password')
+                        ->same('password')
+                        ->required()
+                        ->requiredWith('password')
+                        ->visibleOn('create')
+                        ->rule(Password::default()),
                 ])
             ]);
     }
@@ -59,7 +78,7 @@ class UserResource extends Resource
             Tables\Columns\TextColumn::make('id')->sortable(),
             Tables\Columns\ImageColumn::make('photo_path')->label('Imagen')->disk('users-images'),
             Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-            Tables\Columns\TextColumn::make('role.name')->sortable(),
+            Tables\Columns\TextColumn::make('roles.name')->sortable(),
             Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
             Tables\Columns\TextColumn::make('email_verified_at')
             ->date('d-m-Y'),
@@ -107,7 +126,7 @@ class UserResource extends Resource
     {
         return [
             'index' => Pages\ListUsers::route('/'),
-            // 'create' => Pages\CreateUser::route('/create'),
+            'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
@@ -116,7 +135,7 @@ class UserResource extends Resource
 
     //No-one can create a User
     public static function canCreate() :bool{
-        return false;
+        return true;
     }
 
     //No-one can delete a User
