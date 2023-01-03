@@ -56,7 +56,7 @@ class ProductResource extends Resource
                             ->multiple()
                             ->relationship('processes', 'name'),
                 Forms\Components\TextInput::make('price')->type('number')->step('any')
-                    ->required()->rule('numeric'),
+                    ->required()->rule('numeric')->disabled(),
                 Forms\Components\FileUpload::make('image')->image()
                     ->disk('products-images')
                     ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {
