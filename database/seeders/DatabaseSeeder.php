@@ -66,5 +66,17 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+
+        //Insert Price in Product
+        for ($i = 1; $i <= 10; $i++) {
+            $productProcessesPrice = [];
+            $product = Product::where('id', $i)->first();
+            $productProcesses = $product->processes;
+            foreach($productProcesses as $process){
+                array_push( $productProcessesPrice, $process->price );
+            }
+            $product->price = array_sum($productProcessesPrice);
+            $product->save();
+        }
     }
 }
