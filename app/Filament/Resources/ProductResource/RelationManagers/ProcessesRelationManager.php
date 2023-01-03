@@ -9,6 +9,11 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Models\Product;
+use App\Models\Process;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Contracts\HasRelationshipTable;
+use Filament\Tables\Actions\AttachAction;
 
 class ProcessesRelationManager extends RelationManager
 {
@@ -24,9 +29,7 @@ class ProcessesRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                // Forms\Components\TextInput::make('id')
-                //     ->required()
-                //     ->maxLength(255),
+                
             ]);
     }
 
@@ -36,7 +39,7 @@ class ProcessesRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('price')->money('eur')->sortable()->searchable()->extraAttributes(['class' => 'text-right']),
+                Tables\Columns\TextColumn::make('price')->money('eur')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('unit'),
                 Tables\Columns\TextColumn::make('type')->sortable()->searchable(),
             ])
@@ -44,11 +47,18 @@ class ProcessesRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\AttachAction::make()->label('Añadir proceso')->preloadRecordSelect()
+                ->after(function (HasRelationshipTable $livewire) {
+                    $product = Product::where('id', $livewire->ownerRecord->id)->first();
+                    $product->updateProductPrice();
+                }),
             ])
             ->actions([
-                Tables\Actions\DetachAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\DetachAction::make()->after(function (HasRelationshipTable $livewire) {
+                    $product = Product::where('id', $livewire->ownerRecord->id)->first();
+                    $product->updateProductPrice();
+                }),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                //Tables\Actions\DeleteBulkAction::make(),

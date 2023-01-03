@@ -20,4 +20,14 @@ class Product extends Model
         return $this->HasMany(LineOrder::class);
     }
 
+    public function updateProductPrice(){
+        $productProcessesPrice = [];
+        $productProcesses = $this->processes;
+        foreach($productProcesses as $process){
+            array_push( $productProcessesPrice, $process->price );
+        }
+        $this->price = array_sum($productProcessesPrice);
+        $this->save();
+    }
+
 }
