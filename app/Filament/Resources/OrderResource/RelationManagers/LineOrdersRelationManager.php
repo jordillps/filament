@@ -43,7 +43,11 @@ class LineOrdersRelationManager extends RelationManager
                 Select::make('order_id')
                     ->relationship('order', 'id')->disabledOn('edit')->hiddenOn('create'),
                 Select::make('product_id')
-                    ->relationship('product', 'name')->disabledOn('edit')->required(),
+                    ->relationship('product', 'name', function (HasRelationshipTable $livewire,Builder $query) {
+                        $currentOrderProducts = LineOrder::where('order_id', $livewire->ownerRecord->id)->pluck('product_id')->toArray();
+                        $currentOrderProductsNames = Product::whereIn('id',$currentOrderProducts)->pluck('name')->toArray();
+                        $query->whereNotIn('name', $currentOrderProductsNames);
+                    })->disabledOn('edit')->required(),
                 Forms\Components\TextInput::make('quantity')->required()->numeric()
                 ->extraInputAttributes(['min' => 1, 'max' => 10, 'step' => 1]),   
             ]);
