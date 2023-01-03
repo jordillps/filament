@@ -18,4 +18,12 @@ class Order extends Model
     public function lineOrders(){
         return $this->HasMany(LineOrder::class);
     }
+
+    public function updateOrder(){
+        $lineOrders = LineOrder::where('order_id', $this->id)->pluck('subtotal')->toArray();
+        $this->subtotal = array_sum($lineOrders);
+        $this->tax = round($this->subtotal * 0.21,2);
+        $this->total = $this->subtotal + $this->tax;
+        $this->save();
+    } 
 }

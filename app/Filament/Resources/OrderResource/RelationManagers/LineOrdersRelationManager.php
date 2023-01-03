@@ -20,6 +20,10 @@ use App\Models\Order;
 use App\Models\LineOrder;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Tables\Contracts\HasRelationshipTable;
+use Filament\Facades\Filament;
+use Filament\Notifications\Actions\Action;
+use Filament\Notifications\Notification;
+use Filament\Pages\Actions\CreateAction;
 
 
 class LineOrdersRelationManager extends RelationManager
@@ -37,7 +41,7 @@ class LineOrdersRelationManager extends RelationManager
         return $form
             ->schema([
                 Select::make('order_id')
-                    ->relationship('order', 'id')->disabledOn('edit'),
+                    ->relationship('order', 'id')->disabledOn('edit')->hiddenOn('create'),
                 Select::make('product_id')
                     ->relationship('product', 'name')->disabledOn('edit')->required(),
                 Forms\Components\TextInput::make('quantity')->required()->numeric()
@@ -62,21 +66,13 @@ class LineOrdersRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                // CreateAction::make()
-                //     ->using(function (HasRelationshipTable $livewire, array $data): Model {
-                //     return $livewire->getRelationship()->create($data);
-                // })
-                Tables\Actions\CreateAction::make()->mutateFormDataUsing(function (array $data): array {
+                Tables\Actions\CreateAction::make()->using(function (HasRelationshipTable $livewire, array $data): Model {
                     $product = Product::where('id', $data['product_id'])->first();
                     $data['subtotal'] = round($data['quantity'] * $product->price , 2);
-                    return $data;
-                })->after(function (array $data) {
-                    $lineOrders = LineOrder::where('order_id', $data['order_id'])->pluck('subtotal')->toArray();
-                    $order = Order::where('id', $data['order_id'])->first();
-                    $order->subtotal = array_sum($lineOrders);
-                    $order->tax = round($order->subtotal * 0.21,2);
-                    $order->total = $order->subtotal + $order->tax;
-                    $order->save();
+                    return $livewire->getRelationship()->create($data);
+                })->after(function (HasRelationshipTable $livewire, array $data) {
+                    $order = Order::where('id', $livewire->ownerRecord->id)->first();
+                    $order->updateOrder();
                 }),
             ])
             ->actions([
@@ -85,18 +81,20 @@ class LineOrdersRelationManager extends RelationManager
                     $data['subtotal'] = round($data['quantity'] * $product->price , 2);
                     return $data;
                 })->after(function (array $data) {
-                    $lineOrders = LineOrder::where('order_id', $data['order_id'])->pluck('subtotal')->toArray();
                     $order = Order::where('id', $data['order_id'])->first();
-                    $order->subtotal = array_sum($lineOrders);
-                    $order->tax = round($order->subtotal * 0.21,2);
-                    $order->total = $order->subtotal + $order->tax;
-                    $order->save();
+                    $order->updateOrder();
                 }),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                ->after(function (HasRelationshipTable $livewire) {
+                    $order = Order::where('id', $livewire->ownerRecord->id)->first();
+                    $order->updateOrder();
+                }),
             ])
             ->bulkActions([
                 //Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
+
+    
     
 }
