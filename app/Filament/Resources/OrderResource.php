@@ -43,12 +43,13 @@ class OrderResource extends Resource
                 Card::make()
                 ->schema([
                     TextInput::make('id')->disabled(),
+                    TextInput::make('order_number'),
                     Select::make('customer_id')->relationship('customer', 'name'),
                     Select::make('priority')->options(['Normal' => 'Normal','Urgent' => 'Urgent']),
                     TextInput::make('subtotal')->type('number')->step('any')->disabled(),
                     TextInput::make('tax')->type('number')->step('any')->disabled(),
                     TextInput::make('total')->type('number')->step('any')->disabled(),
-                    Textarea::make('comment')->required()->maxLength(255),
+                    Textarea::make('comment')->maxLength(255),
                     DatePicker::make('created_at')->format('d-m-Y')->required(),
                 ])
             ]);
@@ -59,6 +60,7 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('order_number')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('customer.name')->sortable()->searchable()
                 ->url(fn (Order $record) => CustomerResource::getUrl('edit', ['record' => $record->customer])),
                 Tables\Columns\BadgeColumn::make('priority')->sortable()->searchable()->color(static function ($state): string {
@@ -71,8 +73,9 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('tax')->money('eur')->extraAttributes(['class' => 'text-right']),
                 Tables\Columns\TextColumn::make('total')->money('eur')->extraAttributes(['class' => 'text-right']),
                 Tables\Columns\TextColumn::make('created_at')->label('Fecha')
-                    ->date('d-m-Y'),
-            ])->defaultSort('id', 'DESC')
+                    ->date('d-m-Y')->sortable(),
+            ])
+            ->defaultSort('id', 'DESC')
             ->filters([
                 SelectFilter::make('priority')
                     ->options([

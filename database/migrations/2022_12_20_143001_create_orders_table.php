@@ -15,12 +15,13 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('order_number');
             $table->foreignId('customer_id')->constrained();
             $table->enum('priority', ['Normal', 'Urgent']);
             $table->decimal('subtotal', $precision = 8, $scale = 2)->nullable();
             $table->decimal('tax', $precision = 8, $scale = 2)->nullable();
             $table->decimal('total', $precision = 8, $scale = 2)->nullable();
-            $table->text('comment');
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

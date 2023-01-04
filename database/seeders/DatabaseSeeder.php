@@ -55,7 +55,23 @@ class DatabaseSeeder extends Seeder
         $process = Process::factory(20)->create();
 
         //Orders
-        Order::factory(10)->create();
+        // DB::table('orders')->insert([
+        //     'order_number' => date("Y"). '-' . '0001',
+        //     'customer_id' => 1,
+        //     'priority' => 'Normal',
+        //     'comment' => 'Pedido inicial de la empresa'
+        // ]);
+        
+        Order::factory(1)->create(['order_number' => date("Y"). '-' . '0001' ]);
+        Order::factory(1)->create(['order_number' => date("Y"). '-' . '0002' ]);
+        Order::factory(1)->create(['order_number' => date("Y"). '-' . '0003' ]);
+        Order::factory(1)->create(['order_number' => date("Y"). '-' . '0004' ]);
+        Order::factory(1)->create(['order_number' => date("Y"). '-' . '0005' ]);
+        Order::factory(1)->create(['order_number' => date("Y"). '-' . '0006' ]);
+        Order::factory(1)->create(['order_number' => date("Y"). '-' . '0007' ]);
+        Order::factory(1)->create(['order_number' => date("Y"). '-' . '0008' ]);
+        Order::factory(1)->create(['order_number' => date("Y"). '-' . '0009' ]);
+        Order::factory(1)->create(['order_number' => date("Y"). '-' . '0010' ]);
 
         //Insert in process_product table
         for ($i = 1; $i <= 10; $i++) {

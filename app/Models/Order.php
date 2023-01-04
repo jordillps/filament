@@ -9,7 +9,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['customer_id','priority','subtotal', 'tax','total','comment', 'created_at'];
+    protected $fillable = ['order_number','customer_id','priority','comment', 'created_at'];
 
     public function customer(){
         return $this->belongsTo(Customer::class);
@@ -25,5 +25,7 @@ class Order extends Model
         $this->tax = round($this->subtotal * 0.21,2);
         $this->total = $this->subtotal + $this->tax;
         $this->save();
-    } 
+    }
+    
+    
 }
