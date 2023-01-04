@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportHeaderAction;
+
 
 class ProcessResource extends Resource
 {
@@ -64,6 +66,17 @@ class ProcessResource extends Resource
             ])
             ->filters([
                 //
+            ])
+            ->headerActions([
+                FilamentExportHeaderAction::make('export')
+                ->timeFormat('d-m-Y') // Default time format for naming exports
+                ->defaultFormat('pdf') // xlsx, csv or pdf
+                ->defaultPageOrientation('landscape') // Page orientation for pdf files. portrait or landscape
+                ->disableAdditionalColumns(false) // Disable additional columns input
+                ->disableFilterColumns(false) // Disable filter columns input
+                ->disableFileName(false) // Disable file name input
+                ->disableFileNamePrefix(false) // Disable file name prefix
+                ->disablePreview(false) // Disable export preview
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

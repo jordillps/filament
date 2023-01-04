@@ -20,6 +20,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\DatePicker;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportHeaderAction;
+
 
 class OrderResource extends Resource
 {
@@ -95,6 +97,17 @@ class OrderResource extends Resource
                                 fn($query) => $query->whereDate('created_at', '<=', $data['created_until']));
                         })
                         
+            ])
+            ->headerActions([
+                FilamentExportHeaderAction::make('export')
+                ->timeFormat('d-m-Y') // Default time format for naming exports
+                ->defaultFormat('pdf') // xlsx, csv or pdf
+                ->defaultPageOrientation('landscape') // Page orientation for pdf files. portrait or landscape
+                ->disableAdditionalColumns(false) // Disable additional columns input
+                ->disableFilterColumns(false) // Disable filter columns input
+                ->disableFileName(false) // Disable file name input
+                ->disableFileNamePrefix(false) // Disable file name prefix
+                ->disablePreview(false) // Disable export preview
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
