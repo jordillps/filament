@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('slug');
             $table->text('description');
             $table->decimal('price', $precision = 8, $scale = 2)->nullable();
-            $table->string('image')->nullable();
+            $table->string('photo_path')->nullable();
             $table->timestamps();
         });
     }

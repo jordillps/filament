@@ -59,7 +59,7 @@ class ProductResource extends Resource
                             ->relationship('processes', 'name'),
                 Forms\Components\TextInput::make('price')->type('number')->step('any')
                     ->rule('numeric')->disabled(),
-                Forms\Components\FileUpload::make('image')->image()
+                Forms\Components\FileUpload::make('photo_path')->image()
                     ->disk('products-images')
                     ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {
                         return (string) str($file->getClientOriginalName())->prepend('product-'. date('d-m-Y-H-i-s-'));
@@ -74,7 +74,7 @@ class ProductResource extends Resource
             ->columns([
                 // Split::make([
                     Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
-                    Tables\Columns\ImageColumn::make('image')->disk('products-images')->width(40)->height(40),
+                    Tables\Columns\ImageColumn::make('photo_path')->disk('products-images')->width(40)->height(40),
                     Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                     Tables\Columns\TextColumn::make('price')->money('eur')->sortable()->extraAttributes(['class' => 'text-right']),
                     Tables\Columns\TextColumn::make('processes_count')
