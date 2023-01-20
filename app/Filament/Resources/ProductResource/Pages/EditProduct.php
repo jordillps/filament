@@ -19,11 +19,12 @@ class EditProduct extends EditRecord
     }
 
     protected function handleRecordUpdate(Model $record, array $data): Model{ 
+        $record->update($data);
         $record->updateProductPrice();
         return $record;
     }
 
-    //Redirect to Index after creating this model
+    // Redirect to Index after creating this model
     protected function getRedirectUrl(): string{
         return $this->getResource()::getUrl('index');
     }

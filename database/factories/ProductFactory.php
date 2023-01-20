@@ -24,6 +24,7 @@ class ProductFactory extends Factory
             'slug' => $slug,
             'description' => $this->faker->paragraph($nbSentences = 3, $variableNbSentences = true), 
             // 'price' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 600),
+            'photo_path' => 'https://picsum.photos/200',
         ];
     }
 }

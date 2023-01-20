@@ -74,7 +74,7 @@ class ProductResource extends Resource
             ->columns([
                 // Split::make([
                     Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
-                    Tables\Columns\ImageColumn::make('photo_path')->disk('products-images')->width(40)->height(40),
+                    Tables\Columns\ImageColumn::make('photo_path')->label('Imagen')->disk('products-images')->width(40)->height(40),
                     Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                     Tables\Columns\TextColumn::make('price')->money('eur')->sortable()->extraAttributes(['class' => 'text-right']),
                     Tables\Columns\TextColumn::make('processes_count')
