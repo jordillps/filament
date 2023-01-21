@@ -27,7 +27,7 @@ class Product extends Model
             array_push( $productProcessesPrice, $process->price );
         }
         $this->price = array_sum($productProcessesPrice);
-        $this->save();
+        $this->update(['price', array_sum($productProcessesPrice)]);
     }
 
 }
