@@ -19,6 +19,7 @@ use Filament\Tables\Columns\Layout\Split;
 use Closure;
 use Illuminate\Support\Str;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportHeaderAction;
+use Illuminate\Support\Facades\File; 
 
 
 
@@ -102,8 +103,14 @@ class ProductResource extends Resource
                 Tables\Actions\DeleteAction::make()->disabled(function(Product $record){
                     if($record->lineOrders->count() > 0){
                         return true;
+                    }   
+                })->after(function(Product $record) {
+                    $fileCurrentImagePath = public_path(). '/img/products/' .$record->photo_path;
+                    if(File::exists($fileCurrentImagePath)){ 
+                            File::delete($fileCurrentImagePath);
+                        }
                     }
-                }),
+                ),
             ])
             ->bulkActions([
                 // Tables\Actions\DeleteBulkAction::make(),
