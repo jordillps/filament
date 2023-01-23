@@ -99,8 +99,8 @@ class ProductResource extends Resource
                 ->disablePreview(false) // Disable export preview
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()->disabled(function(Product $record){
+                Tables\Actions\EditAction::make()->label(false),
+                Tables\Actions\DeleteAction::make()->label(false)->disabled(function(Product $record){
                     if($record->lineOrders->count() > 0){
                         return true;
                     }   

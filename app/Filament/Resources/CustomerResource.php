@@ -76,12 +76,12 @@ class CustomerResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->label('Nombre')->sortable()->searchable()->extraAttributes(['class' => 'bg-gray-200']),
-                Tables\Columns\TextColumn::make('phone'),
-                Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('phone')->extraAttributes(['class' => 'text-right']),
+                Tables\Columns\TextColumn::make('email')->sortable()->searchable()->extraAttributes(['class' => 'text-right']),
                 Tables\Columns\TextColumn::make('orders_count')
-                    ->counts('orders')->label('Pedidos'),
+                    ->counts('orders')->label('Pedidos')->extraAttributes(['class' => 'text-right']),
                 Tables\Columns\TextColumn::make('created_at')->toggleable()
-                    ->date('d-m-Y'),
+                    ->date('d-m-Y')->extraAttributes(['class' => 'text-right']),
             ])
             ->filters([
                 //
@@ -98,14 +98,14 @@ class CustomerResource extends Resource
                 ->disablePreview(false) // Disable export preview
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()->disabled(function(Customer $record){
+                Tables\Actions\EditAction::make()->label(false),
+                Tables\Actions\DeleteAction::make()->label(false)->disabled(function(Customer $record){
                     if($record->orders->count() > 0){
                         return true;
                     }
                 }),
                 Tables\Actions\Action::make('exportAsJson')
-                ->label(__('Exportar Json'))
+                ->label(__('Json'))
                 ->action(function ($record) {
                     $name = Str::slug($record->name, '_');
                     return response()->streamDownload(function () use ($record) {

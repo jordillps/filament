@@ -1,1 +1,7 @@
 @import '../../vendor/filament/filament/resources/css/app.css';
+
+:root{
+    font-family: 'Montserrat', sans-serif;
+}
+
+

@@ -89,8 +89,11 @@ class UserResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->label(false),
                 Tables\Actions\Action::make('changePassword')
+                ->label('Change Password')
+                ->color('success')
+                ->icon('heroicon-s-lock-closed')
             ->form([
                 Forms\Components\TextInput::make('new_password')
                         ->password()

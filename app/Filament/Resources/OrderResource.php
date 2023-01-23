@@ -112,8 +112,8 @@ class OrderResource extends Resource
                 ->disablePreview(false) // Disable export preview
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->label(false),
+                Tables\Actions\DeleteAction::make()->label(false),
                
             ])
             ->bulkActions([
