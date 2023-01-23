@@ -3,14 +3,14 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Filament\Resources\UserResource;
 use Filament\Facades\Filament;
+use App\Filament\Resources\UserResource;
 use Filament\Navigation\UserMenuItem;
 
-class AppServiceProvider extends ServiceProvider
+class FilamentServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */
@@ -20,12 +20,19 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */
     public function boot()
     {
+        //
+        Filament::serving(function () {
+            // Using Vite
+            Filament::registerViteTheme('resources/css/filament.css');
+         
+        });
+
         // Filament::serving(function () {
         //     Filament::registerUserMenuItems([
         //         UserMenuItem::make()
@@ -39,6 +46,6 @@ class AppServiceProvider extends ServiceProvider
         //         // ...
         //     ]);
         // });
-
+       
     }
 }
