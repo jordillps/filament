@@ -51,7 +51,9 @@ class OrderResource extends Resource
                     TextInput::make('subtotal')->type('number')->step('any')->disabled(),
                     TextInput::make('tax')->type('number')->step('any')->disabled(),
                     TextInput::make('total')->type('number')->step('any')->disabled(),
-                    Textarea::make('comment')->maxLength(255),
+                    Textarea::make('comment')->maxLength(255)
+                    ->hint(fn ($state, $component) => 'Quedan: ' . $component->getMaxLength() - strlen($state) . ' caracteres')
+                    ->lazy(), //or: reactive() for instant update, but less efficient,
                     DatePicker::make('created_at')->format('d-m-Y')->required(),
                 ])
             ]);
@@ -112,6 +114,7 @@ class OrderResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+               
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

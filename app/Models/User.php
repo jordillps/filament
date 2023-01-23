@@ -50,16 +50,16 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class); // apply your namespace accordingly
     }
 
-    // public function isAdmin(){
-    //     if($this->role->name == 'admin'){
-    //         return true;
-    //     }else{
-    //         return false;
-    //     }
-    // }
+    public function isAdmin(){
+        if($this->role->name == 'admin'){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 
-    //Only the users with this conditions can access filament
+    // Only the users with this conditions can access filament
     // public function canAccessFilament(): bool{
     //     return str_ends_with($this->email, '@admin.com') && $this->hasVerifiedEmail();
     // }

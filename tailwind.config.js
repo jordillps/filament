@@ -13,7 +13,10 @@ module.exports = {
                 primary: colors.blue,
                 success: colors.green,
                 warning: colors.yellow,
-            }, 
+            },
+            fontFamily: {
+                'montserrat': ['Montserrat'],
+            }
         },
     },
     plugins: [

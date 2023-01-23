@@ -17,6 +17,8 @@ use Filament\Forms\Components\Card;
 use Squire\Models\Country;
 use Illuminate\Database\Eloquent\Model;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportHeaderAction;
+use Illuminate\Support\Str;
+
 
 class CustomerResource extends Resource
 {
@@ -102,6 +104,18 @@ class CustomerResource extends Resource
                         return true;
                     }
                 }),
+                Tables\Actions\Action::make('exportAsJson')
+                ->label(__('Exportar Json'))
+                ->action(function ($record) {
+                    $name = Str::slug($record->name, '_');
+                    return response()->streamDownload(function () use ($record) {
+                        $return = $record->attributesToArray();
+                        echo json_encode($return, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+                    }, $name . '.json');
+                })
+                ->tooltip(__('Export'))
+                ->icon('heroicon-s-download')
+                ->color('primary'),
             ])
             ->bulkActions([
                 // Tables\Actions\DeleteBulkAction::make(),
