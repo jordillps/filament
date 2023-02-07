@@ -75,12 +75,12 @@ class CustomerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->label('Nombre')->sortable()->searchable()->extraAttributes(['class' => 'bg-gray-200']),
-                Tables\Columns\TextColumn::make('phone')->extraAttributes(['class' => 'text-right']),
-                Tables\Columns\TextColumn::make('email')->sortable()->searchable()->extraAttributes(['class' => 'text-right']),
+                Tables\Columns\TextColumn::make('name')->label(__('global.name'))->sortable()->searchable()->extraAttributes(['class' => 'bg-gray-200']),
+                Tables\Columns\TextColumn::make('phone')->label(__('global.phone'))->extraAttributes(['class' => 'text-right']),
+                Tables\Columns\TextColumn::make('email')->label(__('global.email'))->sortable()->searchable()->extraAttributes(['class' => 'text-right']),
                 Tables\Columns\TextColumn::make('orders_count')
-                    ->counts('orders')->label('Pedidos')->extraAttributes(['class' => 'text-right']),
-                Tables\Columns\TextColumn::make('created_at')->toggleable()
+                    ->counts('orders')->label(__('global.orders'))->extraAttributes(['class' => 'text-right']),
+                Tables\Columns\TextColumn::make('created_at')->label(__('global.created_at'))->toggleable()
                     ->date('d-m-Y')->extraAttributes(['class' => 'text-right']),
             ])
             ->filters([
