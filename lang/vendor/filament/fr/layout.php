@@ -37,11 +37,5 @@ return [
         'user_menu' => [
             'label' => 'Menu utilisateur',
         ],
-    ],
-
-    'fr' => 'Français',
-    'Spanish' =>'Espagnol',
-    'English'=>'Anglais',
-    'French' => 'French',
-
+    ]
 ];

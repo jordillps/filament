@@ -38,11 +38,6 @@ return [
             'label' => 'User menu',
         ],
 
-    ],
-
-    'en' => 'English',
-    'Spanish' =>'Spanish',
-    'English'=>'English',
-    'French' => 'French',
+    ]
 
 ];

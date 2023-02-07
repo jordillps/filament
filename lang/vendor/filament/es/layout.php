@@ -26,11 +26,5 @@ return [
             'label' => 'Menú del Usuario',
         ],
 
-    ],
-
-    'es' => 'Español',
-    'Spanish' =>'Español',
-    'English'=>'Inglés',
-    'Francés' => 'Francés',
-
+    ]
 ];
