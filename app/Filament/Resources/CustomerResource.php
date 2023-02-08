@@ -43,28 +43,28 @@ class CustomerResource extends Resource
             ->schema([
                 Card::make()
                 ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('name')->label(__('global.name'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('phone')
+                Forms\Components\TextInput::make('phone')->label(__('global.phone'))
                     ->tel()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('email')
+                Forms\Components\TextInput::make('email')->label(__('global.email'))
                     ->email()
                     ->unique(ignoreRecord: true)
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('address')
+                Forms\Components\TextInput::make('address')->label(__('global.address'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('city')
+                Forms\Components\TextInput::make('city')->label(__('global.city'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('postal_code')
+                Forms\Components\TextInput::make('postal_code')->label(__('global.postal-code'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('country')
+                Forms\Components\Select::make('country')->label(__('global.country'))
                     ->options(Country::query()->pluck('name','code_2'))->searchable()->required(),
                     
                 ])
@@ -146,5 +146,25 @@ class CustomerResource extends Resource
     public static function getNavigationBadge(): ?string{
         // return Customer::count();
         return self::getModel()::count();
+    }
+
+    public static function getLabel(): ?string{
+        if(app()->getLocale() == 'en'){
+            return 'customer';
+        }elseif(app()->getLocale() == 'fr'){
+            return 'client';
+        }else{
+            return 'cliente'; 
+        }
+    }
+
+    public static function getPluralLabel(): ?string{
+        if(app()->getLocale() == 'en'){
+            return 'customers';
+        }elseif(app()->getLocale() == 'fr'){
+            return 'clients';
+        }else{
+            return 'clientes'; 
+        }
     }
 }
