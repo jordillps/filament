@@ -78,7 +78,7 @@ return [
         //'na'          => ['name' => 'Nauru',                  'script' => 'Latn', 'native' => 'Ekakairũ Naoero', 'flag_code' => '' ],
         //'guz'         => ['name' => 'Ekegusii',               'script' => 'Latn', 'native' => 'Ekegusii', 'flag_code' => '' ],
         //'en-AU'       => ['name' => 'Australian English',     'script' => 'Latn', 'native' => 'Australian English', 'flag_code' => '' ],
-        'en-GB'       => ['name' => 'British English',        'script' => 'Latn', 'native' => 'English', 'flag_code' => 'gb' ],
+        'en'       => ['name' => 'British English',        'script' => 'Latn', 'native' => 'English', 'flag_code' => 'gb' ],
         //'en-CA'       => ['name' => 'Canadian English',       'script' => 'Latn', 'native' => 'Canadian English', 'flag_code' => '' ],
         //'en-US'       => ['name' => 'U.S. English',           'script' => 'Latn', 'native' => 'U.S. English', 'flag_code' => '' ],
         'es'          => ['name' => 'Spanish',                'script' => 'Latn', 'native' => 'español', 'flag_code' => 'es' ],

@@ -12,4 +12,6 @@ class About extends Page
 
     protected static ?string $navigationGroup = 'Pages';
 
+    // protected static ?string $title = 'Sobre nosotros';
+
 }
