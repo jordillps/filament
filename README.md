@@ -9,6 +9,8 @@
 
 #  Laravel - Filament Project
 
+<p align="center"><img src="https://formalweb.cat/images/core-img/github-filament.jpg" width="80%" alt="Laravel Filament Project"></p>
+
 ## General Features
 <ul>
   <li>User Profile</li>
