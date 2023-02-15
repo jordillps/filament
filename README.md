@@ -23,7 +23,7 @@
   <li>Products</li>
   <li>Processes </li>
     <ul>
-      <li>A grup the processes define the produts</li>
+      <li>A grup the processes define the products</li>
     </ul>
   <li>Customers</li>
   <li>Orders</li>
