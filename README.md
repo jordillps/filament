@@ -9,8 +9,23 @@
 
 #  Laravel - Filament Project
 
-## Features
-### User Profile
-### User Roles
-### Multilanguage
+<p align="center"><img src="https://formalweb.cat/images/github-filament.jpg" width="80%" alt="Laravel Filament Project"></p>
+
+## General Features
+<ul>
+  <li>User Profile</li>
+  <li>User Roles</li>
+  <li>Multilanguage</li>
+</ul>
+
+## Specific Features
+<ul>
+  <li>Products</li>
+  <li>Processes </li>
+    <ul>
+      <li>A grup the processes define the produts</li>
+    </ul>
+  <li>Customers</li>
+  <li>Orders</li>
+</ul>
 
